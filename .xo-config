@@ -1,0 +1,25 @@
+{
+  "prettier": true,
+  "rules": {
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/object-curly-spacing": [
+      "error",
+      "always",
+      {
+        "arraysInObjects": false
+      }
+    ],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "new-cap": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "all"
+      }
+    ],
+    "newline-after-var": ["error", "always"],
+    "import/extensions": "off",
+    "capitalized-comments": "off"
+  }
+}
