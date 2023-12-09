@@ -1,0 +1,11 @@
+{
+  "name": "cosmoballers",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest",
+    "xo": "^0.56.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
