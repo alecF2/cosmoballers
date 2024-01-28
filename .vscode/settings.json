@@ -14,5 +14,5 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "samverschueren.linter-xo"
   },
-  "cSpell.words": ["Elysia"]
+  "cSpell.words": ["Elysia", "libsql", "turso"]
 }
