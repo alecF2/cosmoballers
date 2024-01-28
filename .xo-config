@@ -1,7 +1,14 @@
 {
+  "ignores": [
+    "*.d.ts",
+    "remix.config.js"
+  ],
   "prettier": true,
   "rules": {
-    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/indent": [
+      "error",
+      2
+    ],
     "@typescript-eslint/object-curly-spacing": [
       "error",
       "always",
@@ -18,8 +25,16 @@
         "args": "all"
       }
     ],
-    "newline-after-var": ["error", "always"],
+    "newline-after-var": [
+      "error",
+      "always"
+    ],
     "import/extensions": "off",
-    "capitalized-comments": "off"
+    "capitalized-comments": "off",
+    "n/prefer-global/process": [
+      "error",
+      "always"
+    ],
+    "import/no-named-as-default": "off"
   }
 }
