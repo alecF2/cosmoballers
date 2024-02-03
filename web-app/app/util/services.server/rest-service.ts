@@ -1,5 +1,9 @@
 import { type TypedResponse, json } from '@remix-run/node';
-import { type StandardErrorResponse, type StandardSuccessPostResponse } from '../types/rest';
+import { HttpResponseCode, type StandardErrorResponse, type StandardSuccessPostResponse } from '../types/rest';
+
+export const createStandardResponse<HttpResponseCode> = () => {
+  
+}
 
 export const createStandardSuccessPostResponse = (
   message: string,
