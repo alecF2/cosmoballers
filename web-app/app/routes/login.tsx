@@ -3,10 +3,7 @@ import { Form } from '@remix-run/react';
 import { loginAdminSchema } from '~/db.server/schema/admin';
 import { loginAdmin } from '~/util/services.server/admin-service';
 import { logError } from '~/util/services.server/log-service';
-import {
-  createStandardErrorResponse,
-  createStandardSuccessPostResponse,
-} from '~/util/services.server/rest-service';
+import { createRestResponse } from '~/util/services.server/rest-service';
 
 export async function action({ request }: ActionFunctionArgs) {
   const requestBody = Object.fromEntries(await request.formData());
@@ -16,14 +13,23 @@ export async function action({ request }: ActionFunctionArgs) {
     const authenticated = await loginAdmin(admin);
 
     if (authenticated) {
-      return createStandardSuccessPostResponse(`successfully authenticated ${admin.email}`);
+      return createRestResponse({
+        code: 200,
+        message: `successfully authenticated ${admin.email}`,
+      });
     }
 
-    return createStandardErrorResponse(`could not authenticate ${admin.email}`);
+    return createRestResponse({
+      code: 401,
+      error: `could not authenticate ${admin.email}`,
+    });
   } catch (error) {
     const errorMessage = logError(error);
 
-    return createStandardErrorResponse(errorMessage);
+    return createRestResponse({
+      code: 500,
+      error: errorMessage,
+    });
   }
 }
 
