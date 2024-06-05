@@ -10,6 +10,9 @@ export const insertAdmin = async (data: NewAdmin) => {
   return newAdmin;
 };
 
+/**
+ * returns whether or not admin credentials are valid
+ */
 export const loginAdmin = async (data: LoginAdmin) => {
   const { email, password } = data;
 
@@ -38,4 +41,22 @@ export const getAdminPasswordHash = async (email: string) => {
   }
 
   return admin.hash;
+};
+
+export const getAdminSessionStore = async (email: string) => {
+  const [admin] = await db
+    .select({
+      id: admins.id,
+      email: admins.email,
+      firstName: admins.firstName,
+      lastName: admins.lastName,
+    })
+    .from(admins)
+    .where(eq(admins.email, email));
+
+  if (!admin) {
+    throw new Error(`email ${email} not found`);
+  }
+
+  return admin;
 };

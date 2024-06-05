@@ -1,34 +1,42 @@
-import { type ActionFunctionArgs } from '@remix-run/node';
+import { type LoaderFunctionArgs, redirect, type ActionFunctionArgs } from '@remix-run/node';
 import { Form } from '@remix-run/react';
 import { loginAdminSchema } from '~/db.server/schema/admin';
 import { loginAdmin } from '~/util/services.server/admin-service';
-import { logError } from '~/util/services.server/log-service';
 import { createRestResponse } from '~/util/services.server/rest-service';
+import { createAdminSession, getAdminSessionData } from '~/util/services.server/session-service';
+
+/**
+ * if valid session is found, redirect to home page; if not, stay on page
+ */
+export async function loader({ request }: LoaderFunctionArgs) {
+  const adminData = await getAdminSessionData(request);
+
+  if (adminData) {
+    return redirect('/');
+  }
+
+  return createRestResponse({
+    code: 200,
+    message: 'not logged in as admin, no redirect',
+  });
+}
 
 export async function action({ request }: ActionFunctionArgs) {
-  const requestBody = Object.fromEntries(await request.formData());
-
   try {
-    const admin = loginAdminSchema.parse(requestBody);
-    const authenticated = await loginAdmin(admin);
+    const requestBody = Object.fromEntries(await request.formData());
+    const credentials = loginAdminSchema.parse(requestBody);
+    const authenticated = await loginAdmin(credentials);
 
-    if (authenticated) {
-      return createRestResponse({
-        code: 200,
-        message: `successfully authenticated ${admin.email}`,
-      });
+    if (!authenticated) {
+      throw new Error('credentials are invalid');
     }
 
+    return await createAdminSession(request, credentials.email);
+  } catch (error) {
+    console.error(error);
     return createRestResponse({
       code: 401,
-      error: `could not authenticate ${admin.email}`,
-    });
-  } catch (error) {
-    const errorMessage = logError(error);
-
-    return createRestResponse({
-      code: 500,
-      error: errorMessage,
+      error: `could not authenticate admin`,
     });
   }
 }
