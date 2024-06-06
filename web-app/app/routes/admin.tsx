@@ -1,9 +1,9 @@
 import { type ActionFunctionArgs } from '@remix-run/node';
 import { Form } from '@remix-run/react';
-import { newAdminSchema } from '~/db.server/schema/admin';
-import { insertAdmin } from '~/util/services.server/admin-service';
-import { logError } from '~/util/services.server/log-service';
-import { createRestResponse } from '~/util/services.server/rest-service';
+import { newAdminSchema } from '~/app.server/db/schema/admin';
+import { insertAdmin } from '~/app.server/services/admin-service';
+import { logError } from '~/app.server/services/log-service';
+import { createRestResponse } from '~/app.server/services/rest-service';
 
 export async function action({ request }: ActionFunctionArgs) {
   const requestBody = Object.fromEntries(await request.formData());

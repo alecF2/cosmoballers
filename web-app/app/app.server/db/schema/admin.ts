@@ -2,7 +2,7 @@ import { sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { type z } from 'zod';
-import { hashPassword } from '~/util/services.server/hash-service';
+import { hashPassword } from '~/app.server/services/hash-service';
 
 export const admins = sqliteTable('admins', {
   id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),

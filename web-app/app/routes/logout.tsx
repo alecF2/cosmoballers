@@ -1,5 +1,5 @@
 import { redirect, type ActionFunctionArgs } from '@remix-run/node';
-import { logout } from '~/util/services.server/session-service';
+import { logout } from '~/app.server/services/session-service';
 
 /**
  * logs admin out when invoked through form action

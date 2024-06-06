@@ -1,6 +1,6 @@
 import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
 import { Form, Link, useLoaderData } from '@remix-run/react';
-import { getAdminSessionData } from '~/util/services.server/session-service';
+import { getAdminSessionData } from '~/app.server/services/session-service';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];

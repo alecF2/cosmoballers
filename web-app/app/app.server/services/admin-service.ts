@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm';
 import { verifyPassword } from './hash-service';
 import { logError } from './log-service';
-import { db } from '~/db.server/client';
-import { type NewAdmin, admins, type LoginAdmin } from '~/db.server/schema/admin';
+import { db } from '~/app.server/db/client';
+import { type NewAdmin, admins, type LoginAdmin } from '~/app.server/db/schema/admin';
 
 export const insertAdmin = async (data: NewAdmin) => {
   const [newAdmin] = await db.insert(admins).values(data).returning({ email: admins.email });

@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import * as admin from './schema/admin';
-import { getSecret } from '~/util/services.server/secrets-service';
+import { getSecret } from '~/app.server/services/secrets-service';
 
 const client = createClient({
   url: getSecret('DB_URL'),

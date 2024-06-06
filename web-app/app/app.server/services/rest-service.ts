@@ -1,14 +1,14 @@
 import { type TypedResponse, json } from '@remix-run/node';
 import {
-  isInformationalCode,
-  isSuccessfulCode,
-  isRedirectionCode,
-  isClientErrorCode,
-  isServerErrorCode,
-  type RestResponsePayload,
   type HttpResponseCode,
   type RemixJsonPayload,
-} from '../types/rest';
+  type RestResponsePayload,
+  isClientErrorCode,
+  isInformationalCode,
+  isRedirectionCode,
+  isServerErrorCode,
+  isSuccessfulCode,
+} from '~/util/types/rest';
 
 export const createRestResponse = (
   payload: RestResponsePayload,

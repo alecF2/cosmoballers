@@ -1,7 +1,7 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { getSecret } from './secrets-service';
 import { getAdminSessionStore } from './admin-service';
-import { type AdminSessionData } from '~/db.server/schema/admin';
+import { type AdminSessionData } from '~/app.server/db/schema/admin';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ADMIN_SESSION_KEY = 'adminSessionStore';

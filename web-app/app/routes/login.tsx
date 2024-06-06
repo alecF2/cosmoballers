@@ -1,9 +1,9 @@
 import { type LoaderFunctionArgs, redirect, type ActionFunctionArgs } from '@remix-run/node';
 import { Form } from '@remix-run/react';
-import { loginAdminSchema } from '~/db.server/schema/admin';
-import { loginAdmin } from '~/util/services.server/admin-service';
-import { createRestResponse } from '~/util/services.server/rest-service';
-import { createAdminSession, getAdminSessionData } from '~/util/services.server/session-service';
+import { loginAdminSchema } from '~/app.server/db/schema/admin';
+import { loginAdmin } from '~/app.server/services/admin-service';
+import { createRestResponse } from '~/app.server/services/rest-service';
+import { createAdminSession, getAdminSessionData } from '~/app.server/services/session-service';
 
 /**
  * if valid session is found, redirect to home page; if not, stay on page
