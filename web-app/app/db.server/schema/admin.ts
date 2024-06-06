@@ -31,6 +31,14 @@ export const loginAdminSchema = adminSchema.pick({
   password: true,
 });
 
+export const adminSessionDataSchema = adminSchema.pick({
+  id: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+});
+
 export type Admin = z.infer<typeof adminSchema>;
 export type NewAdmin = z.infer<typeof newAdminSchema>;
 export type LoginAdmin = z.infer<typeof loginAdminSchema>;
+export type AdminSessionData = z.infer<typeof adminSessionDataSchema>;

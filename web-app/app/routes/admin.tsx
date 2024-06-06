@@ -3,10 +3,7 @@ import { Form } from '@remix-run/react';
 import { newAdminSchema } from '~/db.server/schema/admin';
 import { insertAdmin } from '~/util/services.server/admin-service';
 import { logError } from '~/util/services.server/log-service';
-import {
-  createStandardErrorResponse,
-  createStandardSuccessPostResponse,
-} from '~/util/services.server/rest-service';
+import { createRestResponse } from '~/util/services.server/rest-service';
 
 export async function action({ request }: ActionFunctionArgs) {
   const requestBody = Object.fromEntries(await request.formData());
@@ -14,11 +11,19 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     const newAdmin = await insertAdmin(await newAdminSchema.parseAsync(requestBody));
 
-    return createStandardSuccessPostResponse(`inserted new admin with email ${newAdmin.email}`);
+    return createRestResponse({
+      code: 200,
+      message: `inserted new admin with email ${newAdmin.email}`,
+    });
   } catch (error) {
     const errorMessage = logError(error);
 
-    return createStandardErrorResponse(errorMessage);
+    // TODO: must be able to distiguish between 401 and 500 error here,
+    // this isn't always a client error
+    return createRestResponse({
+      code: 401,
+      error: errorMessage,
+    });
   }
 }
 
