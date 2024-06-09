@@ -15,12 +15,16 @@
     "editor.defaultFormatter": "samverschueren.linter-xo"
   },
   "cSpell.words": [
+    "apidocs",
     "Atienza",
     "cosmoballers",
     "Elysia",
+    "emicklei",
     "gofr",
     "gorm",
     "libsql",
+    "openapi",
+    "restfulspec",
     "turso",
     "tursodatabase",
     "ytsruh"

@@ -19,11 +19,3 @@ type Admin struct {
 type AdminResource struct {
 	Conn *gorm.DB
 }
-
-type Controller[T any] interface {
-	CreateOne() (*T, error)
-	GetOne() (*T, error)
-	GetAll() (*[]T, error)
-	UpdateOne() (*T, error)
-	DeleteOne() error
-}

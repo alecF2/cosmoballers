@@ -1,14 +1,15 @@
 package admin
 
-import (
-	"cosmoballers/util"
-)
+import "cosmoballers/util"
 
 func (Admin) TableName() string {
 	return "admins4"
 }
 
-func (s AdminResource) CreateOne(email, firstName, lastName, password string) (*Admin, error) {
+func (s AdminResource) CreateOne(c *Admin) (*Admin, error) {
+	// TODO: add validation soon!
+	email, firstName, lastName, password := c.Email, c.FirstName, c.LastName, c.Password
+
 	hashedPassword, err := util.HashPassword(password)
 	if err != nil {
 		return nil, err

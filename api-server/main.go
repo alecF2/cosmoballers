@@ -1,9 +1,12 @@
 package main
 
 import (
-	"cosmoballers/model/admin"
+	"cosmoballers/schema/admin"
 	"log"
+	"net/http"
 
+	restfulspec "github.com/emicklei/go-restful-openapi/v2"
+	restful "github.com/emicklei/go-restful/v3"
 	"github.com/spf13/viper"
 	sqlite "github.com/ytsruh/gorm-libsql"
 	"gorm.io/gorm"
@@ -42,4 +45,14 @@ func main() {
 	}
 
 	adminResource := admin.AdminResource{Conn: db}
+
+	restful.DefaultContainer.Add(adminResource.WebService())
+
+	config := restfulspec.Config{
+		WebServices: restful.RegisteredWebServices(),
+		APIPath:     "/apidocs.json",
+	}
+	restful.DefaultContainer.Add(restfulspec.NewOpenAPIService(config))
+	log.Printf("start listening on localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
